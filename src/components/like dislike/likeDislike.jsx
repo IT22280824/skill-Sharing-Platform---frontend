@@ -3,17 +3,17 @@ import './LikeDislikeStyles.css';
 import api from '../../api/axiosConfig';
 
 const LikeDislike = ({ postId, likeCount, dislikeCount }) => {
-    const userId = '661e8dcd5f1f1c274bcf0666'; // 🔄 Replace with real user ID from auth/context
+  const userId = '661e8dcd5f1f1c274bcf0666'; // 🔄 Replace with real user ID from auth/context
 
-    const [userReaction, setUserReaction] = useState(() => {
+  const [userReaction, setUserReaction] = useState(() => {
     const saved = localStorage.getItem(`post_${postId}_reaction`);
     try {
-        const parsed = JSON.parse(saved);
-        return parsed === 'like' || parsed === 'dislike' ? parsed : null;
-      } catch {
-        return saved === 'like' || saved === 'dislike' ? saved : null;
-      }
-    });
+      const parsed = JSON.parse(saved);
+      return parsed === 'like' || parsed === 'dislike' ? parsed : null;
+    } catch {
+      return saved === 'like' || saved === 'dislike' ? saved : null;
+    }
+  });
 
   const [counts, setCounts] = useState({
     likes: likeCount ?? 0,
@@ -24,7 +24,7 @@ const LikeDislike = ({ postId, likeCount, dislikeCount }) => {
     try {
       const response = await fetch(`/api/reactions/${postId}`);
       const data = await response.json();
-      console.log('Fetched reaction counts:', data); 
+      console.log('Fetched reaction counts:', data);
       return data;
     } catch (error) {
       console.error('Error fetching reaction counts:', error);
@@ -63,21 +63,41 @@ const LikeDislike = ({ postId, likeCount, dislikeCount }) => {
   };
 
   const handleLike = async () => {
+    // Optimistically update the count
     if (userReaction === 'like') {
       setUserReaction(null);
+      setCounts(prev => ({
+        ...prev,
+        likes: prev.likes - 1,
+      }));
       await sendReaction(false, false);
     } else {
       setUserReaction('like');
+      setCounts(prev => ({
+        ...prev,
+        likes: prev.likes + 1,
+        dislikes: userReaction === 'dislike' ? prev.dislikes - 1 : prev.dislikes,
+      }));
       await sendReaction(true, false);
     }
   };
 
   const handleDislike = async () => {
+    // Optimistically update the count
     if (userReaction === 'dislike') {
       setUserReaction(null);
+      setCounts(prev => ({
+        ...prev,
+        dislikes: prev.dislikes - 1,
+      }));
       await sendReaction(false, false);
     } else {
       setUserReaction('dislike');
+      setCounts(prev => ({
+        ...prev,
+        dislikes: prev.dislikes + 1,
+        likes: userReaction === 'like' ? prev.likes - 1 : prev.likes,
+      }));
       await sendReaction(false, true);
     }
   };
