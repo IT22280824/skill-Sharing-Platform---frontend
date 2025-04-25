@@ -3,17 +3,17 @@ import './LikeDislikeStyles.css';
 import api from '../../api/axiosConfig';
 
 const LikeDislike = ({ postId, likeCount, dislikeCount }) => {
-  const userId = '661e8dcd5f1f1c274bcf0666'; // 🔄 Replace with real user ID from auth/context
+    const userId = '661e8dcd5f1f1c274bcf0666'; // 🔄 Replace with real user ID from auth/context
 
-  const [userReaction, setUserReaction] = useState(() => {
+    const [userReaction, setUserReaction] = useState(() => {
     const saved = localStorage.getItem(`post_${postId}_reaction`);
     try {
-      const parsed = JSON.parse(saved);
-      return parsed === 'like' || parsed === 'dislike' ? parsed : null;
-    } catch {
-      return saved === 'like' || saved === 'dislike' ? saved : null;
-    }
-  });
+        const parsed = JSON.parse(saved);
+        return parsed === 'like' || parsed === 'dislike' ? parsed : null;
+      } catch {
+        return saved === 'like' || saved === 'dislike' ? saved : null;
+      }
+    });
 
   const [counts, setCounts] = useState({
     likes: likeCount ?? 0,

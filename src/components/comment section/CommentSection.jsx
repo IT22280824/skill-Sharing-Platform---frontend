@@ -85,32 +85,36 @@ const CommentSection = ({ postId }) => {
       <h4>Comments</h4>
 
       {comments.map((c) => (
-        <div key={c.id} className="comment">
-          <div className="comment-meta">
-            <strong>{c.userId}</strong>
-            <span className="comment-time">{formatRelativeTime(c.cmntCreatedAt)}</span>
-          </div>
-
-          {editingCommentId === c.id ? (
-            <div>
-              <input
-                type="text"
-                value={editContent}
-                onChange={(e) => setEditContent(e.target.value)}
-              />
-              <button onClick={() => submitEdit(c.id)}>Save</button>
-              <button onClick={() => setEditingCommentId(null)}>Cancel</button>
+            <div key={c.id} className="comment">
+                <div className="comment-meta">
+                    <strong>{c.userId}</strong>
+                    <span className="comment-time">{formatRelativeTime(c.cmntCreatedAt)}</span>
+                </div>
+        
+            <div className="comment-content">
+            {editingCommentId === c.id ? (
+                <div>
+                <input
+                    type="text"
+                    value={editContent}
+                    onChange={(e) => setEditContent(e.target.value)}
+                />
+                <div className="edit-actions">
+                    <button onClick={() => submitEdit(c.id)}>Save</button>
+                    <button onClick={() => setEditingCommentId(null)}>Cancel</button>
+                </div>
+                </div>
+            ) : (
+                <p>{c.cmntContent}</p>
+            )}
             </div>
-          ) : (
-            <p>{c.cmntContent}</p>
-          )}
-
-          {c.userId === userId && editingCommentId !== c.id && (
+        
+            {c.userId === userId && editingCommentId !== c.id && (
             <div className="comment-actions">
-              <button onClick={() => startEditing(c.id, c.cmntContent)}>Edit</button>
-              <button onClick={() => deleteComment(c.id)}>Delete</button>
+                <button onClick={() => startEditing(c.id, c.cmntContent)}>Edit</button>
+                <button onClick={() => deleteComment(c.id)}>Delete</button>
             </div>
-          )}
+            )}
         </div>
       ))}
 
