@@ -70,15 +70,15 @@ const CommentSection = ({ postId }) => {
     };
   
 
-  const formatRelativeTime = (dateString) => {
-    const now = new Date();
-    const then = new Date(dateString);
-    const diff = Math.floor((now - then) / 1000);
-    if (diff < 60) return 'just now';
-    if (diff < 3600) return `${Math.floor(diff / 60)} min ago`;
-    if (diff < 86400) return `${Math.floor(diff / 3600)} hr ago`;
-    return then.toLocaleString();
-  };
+    const formatRelativeTime = (dateString) => {
+      const now = new Date();
+      const then = new Date(dateString);
+      const diff = Math.floor((now - then) / 1000);
+      if (diff < 60) return 'just now';
+      if (diff < 3600) return `${Math.floor(diff / 60)} min ago`;
+      if (diff < 86400) return `${Math.floor(diff / 3600)} hr ago`;
+      return then.toLocaleString();
+    };
 
   return (
     <div className="comment-section">

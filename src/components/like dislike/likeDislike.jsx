@@ -63,7 +63,7 @@ const LikeDislike = ({ postId, likeCount, dislikeCount }) => {
   };
 
   const handleLike = async () => {
-    // Optimistically update the count
+    
     if (userReaction === 'like') {
       setUserReaction(null);
       setCounts(prev => ({
@@ -83,7 +83,7 @@ const LikeDislike = ({ postId, likeCount, dislikeCount }) => {
   };
 
   const handleDislike = async () => {
-    // Optimistically update the count
+    
     if (userReaction === 'dislike') {
       setUserReaction(null);
       setCounts(prev => ({
