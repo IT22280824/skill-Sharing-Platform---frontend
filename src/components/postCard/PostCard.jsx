@@ -21,7 +21,7 @@ const PostCard = ({ post }) => {
       <small>{new Date(post.createdAt).toLocaleString()}</small>
 
       <div className="post-actions">
-        {/* Pass the like and dislike counts to LikeDislike component */}
+        
         <LikeDislike postId={post.id} likeCount={post.likeCount} dislikeCount={post.dislikeCount} />
         
         <button onClick={toggleComments}>

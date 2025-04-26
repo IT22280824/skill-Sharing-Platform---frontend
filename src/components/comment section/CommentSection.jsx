@@ -3,7 +3,7 @@ import './CommentSectionStyles.css';
 import api from '../../api/axiosConfig';
 
 const CommentSection = ({ postId }) => {
-  const userId = '661e8dcd5f1f1c274bcf0666'; // Replace with actual user auth later
+  const userId = '661e8dcd5f1f1c274bcf0666'; // Replace with real user ID from auth/context ------   🆘
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState('');
   const [editingCommentId, setEditingCommentId] = useState(null);
