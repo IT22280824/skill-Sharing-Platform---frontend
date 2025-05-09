@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 
 import PostList from './components/post/PostList.jsx';
+import Dashboard from './components/Dash/Dashboard.jsx';
 
 function App() {
   
@@ -15,6 +16,7 @@ function App() {
       <BrowserRouter>
         <Routes>
         <Route path="/posts" element={<PostList />} />
+        <Route path="/dash" element={<Dashboard />} />
         </Routes>
       </BrowserRouter>
       

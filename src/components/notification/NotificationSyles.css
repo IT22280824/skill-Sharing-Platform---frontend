@@ -1,54 +1,133 @@
+/* NotificationSyles.css */
 .notifications-container {
-    max-width: 600px;
-    margin: 3rem auto;
-    padding: 1.5rem;
-    background-color: #ffffff;
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    width: 360px;
+    background: #fff;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    font-family: Arial, sans-serif;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
   }
   
   .notifications-container h2 {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 1.25rem;
-    color: #333;
+    font-size: 16px;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.9);
+    padding: 16px 16px 8px;
+    margin: 0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .error {
+    color: #d11124;
+    padding: 16px;
+    font-size: 14px;
+  }
+  
+  .no-notifications {
+    color: rgba(0, 0, 0, 0.6);
+    text-align: center;
+    padding: 24px 16px;
+    font-size: 14px;
   }
   
   .notifications-list {
     list-style: none;
     padding: 0;
     margin: 0;
+    max-height: 500px;
+    overflow-y: auto;
   }
   
   .notification-item {
-    border: 1px solid #e0e0e0;
-    background-color: #f9f9f9;
-    padding: 0.75rem 1rem;
-    border-radius: 6px;
-    margin-bottom: 0.75rem;
+    padding: 12px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    position: relative;
+  }
+  
+  .notification-item.unread {
+    background-color: #f5f8fa;
+  }
+  
+  .notification-item.unread::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: #0a66c2;
+  }
+  
+  .notification-content {
+    cursor: pointer;
+    padding-right: 40px;
+  }
+  
+  .notification-item:hover {
+    background-color: #f5f5f5;
   }
   
   .message {
-    font-size: 1rem;
-    color: #444;
-    margin-bottom: 0.4rem;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.9);
+    margin: 0 0 4px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  
+  .read .message {
+    font-weight: 400;
   }
   
   .meta {
-    font-size: 0.85rem;
-    color: #777;
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.6);
+    margin: 0;
   }
   
-  .no-notifications {
-    font-size: 0.95rem;
-    color: #666;
+  .mark-read-btn {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #0a66c2;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
   }
   
-  .error {
-    text-align: center;
-    margin-top: 2rem;
-    color: red;
-    font-weight: bold;
+  .mark-read-btn:hover {
+    background-color: rgba(10, 102, 194, 0.1);
   }
   
+  /* Timestamp styling (add if your notifications have timestamps) */
+  .timestamp {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.4);
+    margin-top: 4px;
+  }
+  
+  /* Header controls (if you want to add "Mark all as read") */
+  .notifications-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .mark-all-read {
+    background: none;
+    border: none;
+    color: #0a66c2;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0 16px 8px;
+  }
+  
+  .mark-all-read:hover {
+    text-decoration: underline;
+  }
