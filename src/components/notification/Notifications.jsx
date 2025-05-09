@@ -83,7 +83,7 @@ const Notifications = ({ recipientId }) => {
           </button>
         </div>
       )}
-      
+
       {notifications.length === 0 ? (
         <p className="no-notifications">No notifications yet.</p>
       ) : (
@@ -104,9 +104,14 @@ const Notifications = ({ recipientId }) => {
                   }}
                 >
                   <p className="message">{note.message}</p>
-                  <p className="meta">
+                  {/* <p className="meta">
                     Post ID: {note.postId?.toString?.()} | From: {note.senderId}
+                  </p> */}
+
+                  <p className="meta">
+                    Post ID: {note.postId?.toString?.()} | From: {note.senderUsername}
                   </p>
+
                 </div>
 
                 {!note.read && (
