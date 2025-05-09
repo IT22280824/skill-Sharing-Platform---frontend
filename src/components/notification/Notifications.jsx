@@ -47,19 +47,43 @@ const Notifications = ({ recipientId }) => {
       }
     };
 
+
+
+    const clearAllNotifications = async () => {
+      try {
+        await api.delete(`/api/notifications/clear-all/${recipientId}`);
+        setNotifications([]); // Clear state
+      } catch (err) {
+        console.error('Failed to clear all notifications', err);
+      }
+    };
+    
+
+
+
   return (
     <div className="notifications-container">
       <h2>Notifications</h2>
       {error && <p className="error">{error}</p>}
       {notifications.length > 0 && (
-        <button className="mark-all-btn" onClick={(e) => {
-          e.stopPropagation();
-          e.preventDefault();
-          markAllAsRead();
-        }}>
-          Mark All as Read
-        </button>
+        <div className="notification-actions">
+          <button className="mark-all-btn" onClick={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            markAllAsRead();
+          }}>
+            Mark All as Read
+          </button>
+          <button className="clear-all-btn" onClick={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            clearAllNotifications();
+          }}>
+            Clear All
+          </button>
+        </div>
       )}
+      
       {notifications.length === 0 ? (
         <p className="no-notifications">No notifications yet.</p>
       ) : (

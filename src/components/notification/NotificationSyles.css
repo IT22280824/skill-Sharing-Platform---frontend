@@ -24,22 +24,41 @@
   margin: 0;
 }
 
-.mark-all-btn {
+.notification-actions {
+  display: flex;
+  gap: 8px;
+  padding: 8px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  background-color: #f9f9f9;
+}
+
+.mark-all-btn, .clear-all-btn {
   background: none;
   border: none;
-  color: #0a66c2;
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
-  padding: 4px 8px;
+  padding: 6px 12px;
   border-radius: 4px;
-  margin-left: auto;
   transition: all 0.2s ease;
+}
+
+.mark-all-btn {
+  color: #0a66c2;
+  border: 1px solid #0a66c2;
 }
 
 .mark-all-btn:hover {
   background-color: rgba(10, 102, 194, 0.1);
-  text-decoration: underline;
+}
+
+.clear-all-btn {
+  color: #d11124;
+  border: 1px solid #d11124;
+}
+
+.clear-all-btn:hover {
+  background-color: rgba(209, 17, 36, 0.1);
 }
 
 .error {
@@ -160,5 +179,14 @@
   
   .notification-item {
     padding: 10px 12px;
+  }
+  
+  .notification-actions {
+    padding: 8px 12px;
+  }
+  
+  .mark-all-btn, .clear-all-btn {
+    padding: 4px 8px;
+    font-size: 11px;
   }
 }
