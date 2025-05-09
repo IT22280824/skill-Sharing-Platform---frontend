@@ -35,10 +35,31 @@ const Notifications = ({ recipientId }) => {
     }
   };
 
+
+    const markAllAsRead = async () => {
+      try {
+        await api.post(`/api/notifications/mark-all-read/${recipientId}`);
+        setNotifications((prev) =>
+          prev.map((note) => ({ ...note, read: true }))
+        );
+      } catch (err) {
+        console.error('Failed to mark all as read', err);
+      }
+    };
+
   return (
     <div className="notifications-container">
       <h2>Notifications</h2>
       {error && <p className="error">{error}</p>}
+      {notifications.length > 0 && (
+        <button className="mark-all-btn" onClick={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          markAllAsRead();
+        }}>
+          Mark All as Read
+        </button>
+      )}
       {notifications.length === 0 ? (
         <p className="no-notifications">No notifications yet.</p>
       ) : (
@@ -68,7 +89,7 @@ const Notifications = ({ recipientId }) => {
                   <button
                     className="mark-read-btn"
                     onClick={(e) => {
-                      e.stopPropagation(); // Prevent triggering parent onClick
+                      e.stopPropagation();
                       markAsRead(id);
                     }}
                   >
