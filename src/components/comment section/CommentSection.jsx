@@ -87,7 +87,7 @@ const CommentSection = ({ postId }) => {
       {comments.map((c) => (
             <div key={c.id} className="comment">
                 <div className="comment-meta">
-                    <strong>{c.userId}</strong>
+                    <strong>{c.username}</strong>
                     <span className="comment-time">{formatRelativeTime(c.cmntCreatedAt)}</span>
                 </div>
         
