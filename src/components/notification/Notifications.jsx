@@ -57,6 +57,37 @@ const Notifications = ({ recipientId }) => {
         console.error('Failed to clear all notifications', err);
       }
     };
+
+
+    const likeNotification = async (notificationId) => {
+      try {
+        await api.post(`/api/notifications/${notificationId}/like`);
+        setNotifications((prevNotifications) =>
+          prevNotifications.map((note) =>
+            note._id === notificationId
+              ? { ...note, likeCount: note.likeCount + 1 }
+              : note
+          )
+        );
+      } catch (err) {
+        console.error('Failed to like notification', err);
+      }
+    };
+
+    const dislikeNotification = async (notificationId) => {
+      try {
+        await api.post(`/api/notifications/${notificationId}/dislike`);
+        setNotifications((prevNotifications) =>
+          prevNotifications.map((note) =>
+            note._id === notificationId
+              ? { ...note, dislikeCount: note.dislikeCount + 1 }
+              : note
+          )
+        );
+      } catch (err) {
+        console.error('Failed to dislike notification', err);
+      }
+    };
     
 
 
@@ -67,18 +98,24 @@ const Notifications = ({ recipientId }) => {
       {error && <p className="error">{error}</p>}
       {notifications.length > 0 && (
         <div className="notification-actions">
-          <button className="mark-all-btn" onClick={(e) => {
-            e.stopPropagation();
-            e.preventDefault();
-            markAllAsRead();
-          }}>
+          <button
+            className="mark-all-btn"
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              markAllAsRead();
+            }}
+          >
             Mark All as Read
           </button>
-          <button className="clear-all-btn" onClick={(e) => {
-            e.stopPropagation();
-            e.preventDefault();
-            clearAllNotifications();
-          }}>
+          <button
+            className="clear-all-btn"
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              clearAllNotifications();
+            }}
+          >
             Clear All
           </button>
         </div>
@@ -104,14 +141,9 @@ const Notifications = ({ recipientId }) => {
                   }}
                 >
                   <p className="message">{note.message}</p>
-                  {/* <p className="meta">
-                    Post ID: {note.postId?.toString?.()} | From: {note.senderId}
-                  </p> */}
-
                   <p className="meta">
-                    Post ID: {note.postId?.toString?.()} | From: {note.senderUsername}
+                    Post ID: {note.postId?.toString()} | From: {note.senderUsername}
                   </p>
-
                 </div>
 
                 {!note.read && (
