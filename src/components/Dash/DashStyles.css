@@ -2,6 +2,7 @@
 .dashboard-container {
     font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
     max-width: 1200px;
+    margin-right: -20%;
     margin: 0 auto;
     padding: 20px;
     color: #000000e6;
